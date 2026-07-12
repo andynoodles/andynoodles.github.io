@@ -1,0 +1,33 @@
+# Andy Chen 陳奕翔
+
+> Software engineer in Taipei, Taiwan, specializing in production LLM systems: on-premise inference optimization with vLLM, OCR platforms, and ML infrastructure. B.S. in Computer Science and Information Engineering from National Taipei University of Technology (NTUT), Class of 2026. First-author publication at TANET 2025.
+
+Andy Chen (陳奕翔, also known as andynoodles) is a software engineer at ARDGE in Taipei. He built LensCopy, an independent OCR SaaS serving 6,000+ unique visitors per month, and publishes open-source Traditional Chinese OCR datasets on Hugging Face with 5,000+ monthly downloads.
+
+## Profile
+
+- [Personal site](https://andynoodles.github.io/): Full portfolio with experience, projects, and skills
+- [Résumé (PDF)](https://andynoodles.github.io/assets/andy-chen-resume.pdf): Current one-page resume
+- [GitHub](https://github.com/andynoodles): Open-source code and benchmarks
+- [Hugging Face](https://huggingface.co/andynoodles): Published datasets and models
+- [LinkedIn](https://www.linkedin.com/in/yi-hsiang-chen-tw/): Professional profile
+
+## Experience
+
+- ARDGE (Jan 2026 – present), Software Engineer: production-grade OCR application from PoC to enterprise scale; on-premise vLLM inference optimization (PagedAttention, 3–5× throughput gains); benchmarking of frontier LLM-optimization research (FlashAttention, speculative decoding, KV-cache compression)
+- National Center for High-performance Computing, NCHC (Jul – Dec 2025), Software Engineer Intern: RAG-based customer-service system with LangChain, BM25 hybrid search, and pgvector; Docker/Kubernetes deployment stress-tested to 4,000+ concurrent users
+
+## Projects
+
+- [LensCopy](https://lenscopy.com/): Full-stack AI-powered OCR SaaS — Vue 3, FastAPI, multi-GPU vLLM pipeline, 200+ concurrent inference requests, 10+ orchestrated services with Prometheus/Grafana observability
+- Lightweight Code Completion Model Fine-Tuning: end-to-end pipelines to fine-tune Gemma3-270M, Llama-3.2-1B, and Qwen2.5-Coder-1.5B with PyTorch, Optuna, and Slurm on NVIDIA H200 clusters; led to a first-author paper at TANET 2025 — [paper PDF](https://andynoodles.github.io/assets/tanet2025-enhancing-slm-agentic-pipelines.pdf)
+
+## Open Source
+
+- [Taiwan Document OCR (zh-TW)](https://huggingface.co/collections/andynoodles/taiwan-document-ocr-zh-tw): 4 block-level OCR datasets, 1.2M+ annotated blocks covering Traditional Chinese government and financial documents from 1928–2024
+- [RT-DETR Model Benchmark](https://github.com/andynoodles/PPDocLayout-V3-Benchmark): PP-DocLayoutV3 inference benchmark across PyTorch, ONNX Runtime, and PaddlePaddle, including an upstream ONNX preprocessing bug fix
+
+## Contact
+
+- Location: Taipei, Taiwan
+- Languages: English (TOEIC 865, CEFR B2), Mandarin (native)

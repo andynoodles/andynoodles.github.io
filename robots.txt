@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andynoodles.github.io/sitemap.xml
