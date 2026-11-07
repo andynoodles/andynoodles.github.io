@@ -19,7 +19,7 @@ Andy Chen (陳奕翔, also known as andynoodles) is a software engineer at ARDGE
 
 ## Projects
 
-- [LensCopy](https://lenscopy.com/): Full-stack AI-powered OCR SaaS — Vue 3, FastAPI, multi-GPU vLLM pipeline, 200+ concurrent inference requests, 10+ orchestrated services with Prometheus/Grafana observability
+- LensCopy:Full-stack AI-powered OCR SaaS — Vue 3, FastAPI, multi-GPU vLLM pipeline, 200+ concurrent inference requests, 10+ orchestrated services with Prometheus/Grafana observability
 - Lightweight Code Completion Model Fine-Tuning: end-to-end pipelines to fine-tune Gemma3-270M, Llama-3.2-1B, and Qwen2.5-Coder-1.5B with PyTorch, Optuna, and Slurm on NVIDIA H200 clusters; led to a first-author paper at TANET 2025 — [paper PDF](https://andynoodles.github.io/assets/tanet2025-enhancing-slm-agentic-pipelines.pdf)
 
 ## Open Source
