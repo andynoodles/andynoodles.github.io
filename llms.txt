@@ -1,8 +1,8 @@
 # Andy Chen 陳奕翔
 
-> Software engineer in Taipei, Taiwan, specializing in production LLM systems: on-premise inference optimization with vLLM, OCR platforms, and ML infrastructure. B.S. in Computer Science and Information Engineering from National Taipei University of Technology (NTUT), Class of 2026. First-author publication at TANET 2025.
+> Software engineer in Taipei, Taiwan, specializing in production LLM systems: vLLM scheduler and GPU-kernel optimization, large-scale RAG, OCR platforms, and ML infrastructure. B.S. in Computer Science and Information Engineering from National Taipei University of Technology (NTUT), Class of 2026. First-author publication at TANET 2025.
 
-Andy Chen (陳奕翔, also known as andynoodles) is a software engineer at ARDGE in Taipei. He built LensCopy, an independent OCR SaaS serving 6,000+ unique visitors per month, and publishes open-source Traditional Chinese OCR datasets on Hugging Face with 5,000+ monthly downloads.
+Andy Chen (陳奕翔, also known as andynoodles) is a software engineer at ARDGE in Taipei. He built LensCopy, an independent OCR SaaS serving 6,000+ unique visitors per month, and publishes open-source Traditional Chinese OCR datasets on Hugging Face with 5,000+ downloads.
 
 ## Profile
 
@@ -14,7 +14,7 @@ Andy Chen (陳奕翔, also known as andynoodles) is a software engineer at ARDGE
 
 ## Experience
 
-- ARDGE (Jan 2026 – present), Software Engineer: production-grade OCR application from PoC to enterprise scale; on-premise vLLM inference optimization (PagedAttention, 3–5× throughput gains); benchmarking of frontier LLM-optimization research (FlashAttention, speculative decoding, KV-cache compression)
+- ARDGE (Jan 2026 – present), Software Engineer: custom vLLM scheduler and GPU-kernel algorithm on a GB300 desktop (2.4× tok/s single-request, 4.3× at 32 concurrent requests); KV-cache management benchmarking (PagedAttention, RadixAttention, LMCache, TurboQuant); production OCR system (95.8%+ accuracy at 1 page/sec); large-scale RAG over 20M+ chunks with sub-500 ms retrieval; agentic customer-service harness built on LLM tool calling
 - National Center for High-performance Computing, NCHC (Jul – Dec 2025), Software Engineer Intern: RAG-based customer-service system with LangChain, BM25 hybrid search, and pgvector; Docker/Kubernetes deployment stress-tested to 4,000+ concurrent users
 
 ## Projects

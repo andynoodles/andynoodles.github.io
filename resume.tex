@@ -141,7 +141,7 @@
 
 \begin{center}
     \textbf{\Huge Andy Chen 陳奕翔} \\ \vspace{5pt}
-    \small 
+    \small
     \faMapMarker* \hspace{2pt}\texttt{Taipei City, Taiwan}
     \\ \vspace{4pt}
     \small
@@ -159,11 +159,15 @@
   {\href{https://ardge.com/}{ARDGE}}{Jan. 2026 -- Present}
   {Software Engineer}{Taipei, Taiwan}
   \resumeItemListStart
-    \resumeItem{\textbf{Enterprise Application Deployment:} Spearheaded the end-to-end development of a production-grade \textbf{OCR} application, transitioning the project from a Proof of Concept (PoC) to a high-throughput enterprise solution.}
-    
-    \resumeItem{\textbf{On-Premise Inference Optimization:} Optimized local deployment workflows using \textbf{vLLM} leveraging \textbf{PagedAttention}; efficiently allocated RAM/CPU resources for edge environments, increasing system throughput by \textbf{3x--5x} through tuning \texttt{max\_concurrency} and \texttt{max\_batch\_tokens} for target hardware.}
-    
-    \resumeItem{\textbf{Frontier paper Survey \& Verification:} Investigated and benchmarked emerging LLM optimization papers from arXiv; conducted empirical evaluations on \textbf{FlashAttention} and \textbf{TriAttention} for computational speedups, \textbf{MTP} and \textbf{Eagle3} for speculative decoding, alongside \textbf{RadixAttention}, \textbf{LMCache}, and \textbf{TurboQuant} for KV caching and compressing.}
+    \resumeItem{\textbf{vLLM Scheduler \& GPU Kernel Optimization:} Implemented custom algorithm in both vLLM scheduler and GPU kernel on GB300 Desktop, achieving \textbf{2.4x} tok/s at single request and \textbf{4.3x} tok/s at 32 concurrent requests.}
+
+    \resumeItem{\textbf{KV Cache Management \& Compression:} Evaluated and benchmarked \textbf{PagedAttention}, \textbf{RadixAttention}, \textbf{LMCache}, and \textbf{TurboQuant} for memory efficiency.}
+
+    \resumeItem{\textbf{Enterprise OCR System:} Engineered a high-throughput production OCR application achieving \textbf{95.8\%+ accuracy} at a processing speed of \textbf{1 page/sec}.}
+
+    \resumeItem{\textbf{Large-Scale RAG System (20M+ Chunks):} Designed and optimized a custom vector search algorithm, reducing query retrieval latency to \textbf{under 500ms} across twenty-million-scale document repositories.}
+
+    \resumeItem{\textbf{Customer Service Agent Harness:} Architected an agentic customer support framework centered on user experience, leveraging \textbf{LLM tool-calling capabilities} to streamline complex client-facing workflows.}
   \resumeItemListEnd
 
     \resumeSubheading
@@ -184,7 +188,7 @@
       \resumeProjectHeading
           {\textbf{\href{https://lenscopy.com/}{\textcolor{blue}{LensCopy \faExternalLink*}} --- Full-Stack AI-Powered OCR SaaS Platform}}{2025 -- Present}
           \resumeItemListStart
-            \resumeItem{\textbf{Independently SaaS:} Designed, built, and deployed a complete document-to-text extraction platform with a \textbf{Vue 3} frontend, \textbf{FastAPI} backend, and a multi-stage ML pipeline --- serving \textbf{6,000+ unique vistors/month} with \textbf{10,000+ pages processed}, on a freemium subscription model with geo-aware pricing across \textbf{37+ countries}.}
+            \resumeItem{\textbf{Independently SaaS:} Designed, built, and deployed a complete document-to-text extraction platform with a \textbf{Vue 3} frontend, \textbf{FastAPI} backend, and a multi-stage ML pipeline --- serving \textbf{6,000+ unique visitors/month} with \textbf{10,000+ pages processed}, on a freemium subscription model with geo-aware pricing across \textbf{37+ countries}.}
             \resumeItem{\textbf{Multi-GPU ML Pipeline:} Engineered a high throughput pipeline architecture where a \textbf{Deep-learning layout detector} overlaps with a \textbf{Vision-language model}  inference across \textbf{multiple GPUs} via \textbf{vLLM}, utilizing continuous batching and \textbf{asyncio} for \textbf{200+ concurrent} inference requests with automatic VRAM-aware batch calibration.}
             \resumeItem{\textbf{Production Infrastructure:} Orchestrated \textbf{10+ Docker Compose services} across 2 GPUs --- vLLM, pipeline, FastAPI, Vue/Nginx proxy, PostgreSQL, Redis, \textbf{SeaweedFS} (S3 storage), admin panel --- with full observability via \textbf{Prometheus}, \textbf{Grafana}, and Dozzle. }
           \resumeItemListEnd

@@ -22,6 +22,16 @@
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍜</text></svg>">
 
+<script>
+  // Set the theme before first paint so dark-mode visitors don't see a light flash.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    var dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -60,8 +70,28 @@
     --chip-bg: rgba(30, 32, 32, 0.05);
     --accent-soft: rgba(206, 66, 43, 0.08);
     --nav-bg: rgba(246, 234, 224, 0.85);
+    color-scheme: light;
+  }
+  /* No-JS fallback: follow the OS setting when no theme has been applied */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --bg: #1e2020;
+      --surface: rgba(246, 234, 224, 0.035);
+      --ink: #f6eae0;
+      --ink-soft: #ddd2c7;
+      --muted: #a89e93;
+      --accent: #e0603f;
+      --accent-contrast: #1e2020;
+      --line: rgba(246, 234, 224, 0.14);
+      --line-strong: rgba(246, 234, 224, 0.28);
+      --chip-bg: rgba(246, 234, 224, 0.06);
+      --accent-soft: rgba(224, 96, 63, 0.12);
+      --nav-bg: rgba(30, 32, 32, 0.85);
+      color-scheme: dark;
+    }
   }
   [data-theme="dark"] {
+    color-scheme: dark;
     --bg: #1e2020;
     --surface: rgba(246, 234, 224, 0.035);
     --ink: #f6eae0;
@@ -161,12 +191,16 @@
   }
   .nav-name span { color: var(--accent); }
   .nav-links {
+    flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 4px;
     overflow-x: auto;
     scrollbar-width: none;
   }
+  /* auto margin right-aligns the links but collapses to 0 when they overflow, so nothing becomes unreachable */
+  .nav-links a:first-child { margin-left: auto; }
   .nav-links::-webkit-scrollbar { display: none; }
   .nav-links a {
     color: var(--muted);
@@ -485,7 +519,14 @@
     section { padding: 44px 0; }
     .entry { grid-template-columns: 1fr; gap: 4px; padding: 22px 0; }
     .entry-when { padding-top: 0; order: -1; }
-    .nav-inner { padding: 12px 20px; }
+    .nav-inner { padding: 12px 20px; gap: 10px; }
+    .nav-links a { padding: 5px 8px; }
+    /* fade the right edge so it's clear the link strip scrolls sideways */
+    .nav-links {
+      padding-right: 18px;
+      -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent);
+      mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent);
+    }
     .wrap { padding: 0 20px; }
   }
 
@@ -515,12 +556,13 @@
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#open-source">Open Source</a>
+      <a href="#education">Education</a>
       <a href="#skills">Skills</a>
-      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">
-        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button>
     </div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -533,12 +575,12 @@
         <p class="kicker mono">Software Engineer · Taipei, Taiwan</p>
         <h1>Andy Chen<span class="zh" lang="zh-Hant">陳奕翔</span></h1>
         <p class="blurb">
-          I build <strong>production LLM systems</strong> — from on-premise inference optimization
-          with <strong>vLLM</strong> to a full-stack <strong>OCR platform</strong> serving thousands
-          of users. Currently a software engineer at
+          I build <strong>production LLM systems</strong> — from <strong>vLLM</strong> scheduler and
+          GPU-kernel optimization to large-scale <strong>RAG</strong> and a full-stack
+          <strong>OCR platform</strong> serving thousands of users. Currently a software engineer at
           <a href="https://ardge.com/" target="_blank" rel="noopener noreferrer">ARDGE</a>,
           and the author of open-source Traditional Chinese OCR datasets with
-          <strong>5,000+ monthly downloads</strong> on Hugging Face.
+          <strong>5,000+ downloads</strong> on Hugging Face.
         </p>
         <p class="hero-status"><span class="dot" aria-hidden="true">●</span>B.S. in Computer Science &amp; Information Engineering, NTUT · Class of 2026</p>
       </div>
@@ -583,12 +625,14 @@
           </div>
         </div>
         <ul>
-          <li><strong>Enterprise application deployment:</strong> Spearheaded end-to-end development of a production-grade OCR application, taking it from proof of concept to a high-throughput enterprise solution.</li>
-          <li><strong>On-premise inference optimization:</strong> Optimized local deployment workflows with vLLM and PagedAttention; tuned <code>max_concurrency</code> and <code>max_batch_tokens</code> for target hardware, increasing system throughput by <strong>3–5×</strong> in edge environments.</li>
-          <li><strong>Frontier research survey &amp; verification:</strong> Benchmarked emerging LLM optimization work from arXiv — FlashAttention and TriAttention for compute speedups, MTP and Eagle3 for speculative decoding, and RadixAttention, LMCache, and TurboQuant for KV caching and compression.</li>
+          <li><strong>vLLM scheduler &amp; GPU kernel optimization:</strong> Implemented a custom algorithm in both the vLLM scheduler and the GPU kernel on a GB300 desktop, achieving <strong>2.4×</strong> tok/s for a single request and <strong>4.3×</strong> tok/s at 32 concurrent requests.</li>
+          <li><strong>KV cache management &amp; compression:</strong> Evaluated and benchmarked PagedAttention, RadixAttention, LMCache, and TurboQuant for memory efficiency.</li>
+          <li><strong>Enterprise OCR system:</strong> Engineered a high-throughput production OCR application achieving <strong>95.8%+ accuracy</strong> at <strong>1 page/sec</strong>.</li>
+          <li><strong>Large-scale RAG system (20M+ chunks):</strong> Designed and optimized a custom vector search algorithm, reducing retrieval latency to <strong>under 500 ms</strong> across twenty-million-scale document repositories.</li>
+          <li><strong>Customer service agent harness:</strong> Architected an agentic customer-support framework centered on user experience, using LLM tool calling to streamline complex client-facing workflows.</li>
         </ul>
         <div class="entry-tags">
-          <span class="tag">vLLM</span><span class="tag">OCR</span><span class="tag">PagedAttention</span><span class="tag">Speculative Decoding</span><span class="tag">KV Cache</span>
+          <span class="tag">vLLM</span><span class="tag">GPU Kernels</span><span class="tag">GB300</span><span class="tag">KV Cache</span><span class="tag">OCR</span><span class="tag">RAG</span><span class="tag">Tool Calling</span>
         </div>
       </div>
     </article>
@@ -672,7 +716,7 @@
         <h3><a href="https://huggingface.co/collections/andynoodles/taiwan-document-ocr-zh-tw" target="_blank" rel="noopener noreferrer">Taiwan Document OCR (zh-TW)<span class="ext" aria-hidden="true">↗</span></a></h3>
         <p class="entry-role">Open-Source OCR Dataset Collection</p>
         <ul>
-          <li><strong>Dataset creation &amp; curation:</strong> Created and published <strong>4 block-level OCR datasets</strong> (<strong>1.2M+ annotated blocks</strong>, <strong>5,000+ monthly downloads</strong>) on Hugging Face — Traditional Chinese government and financial documents spanning 1928–2024: financial statements, Legislative Yuan gazettes, Judicial Yuan publications, and urban planning records.</li>
+          <li><strong>Dataset creation &amp; curation:</strong> Created and published <strong>4 block-level OCR datasets</strong> (<strong>1.2M+ annotated blocks</strong>, <strong>5,000+ downloads</strong>) on Hugging Face — Traditional Chinese government and financial documents spanning 1928–2024: financial statements, Legislative Yuan gazettes, Judicial Yuan publications, and urban planning records.</li>
           <li><strong>Structured block-level annotations:</strong> Each record pairs a document-image crop with block-level OCR text, bounding box, and layout type (paragraph, table, title, seal, …) with document/page/block indexing — supporting OCR, layout-analysis, and document-understanding training and evaluation.</li>
         </ul>
         <div class="entry-tags">
@@ -704,7 +748,7 @@
     </div>
 
     <article class="entry">
-      <div class="entry-when">2022 — 2026</div>
+      <div class="entry-when">Aug 2022 — Jun 2026</div>
       <div class="entry-body">
         <h3><a href="https://www.ntut.edu.tw/" target="_blank" rel="noopener noreferrer">National Taipei University of Technology (NTUT)<span class="ext" aria-hidden="true">↗</span></a></h3>
         <p class="entry-role">B.S. in Computer Science and Information Engineering<span class="loc">Taipei, Taiwan</span></p>
@@ -715,7 +759,7 @@
     </article>
 
     <article class="entry">
-      <div class="entry-when">2019 — 2022</div>
+      <div class="entry-when">Aug 2019 — Jun 2022</div>
       <div class="entry-body">
         <h3><a href="https://www.taivs.tp.edu.tw/" target="_blank" rel="noopener noreferrer">Taipei Municipal Daan Vocational High School<span class="ext" aria-hidden="true">↗</span></a></h3>
         <p class="entry-role">High School Diploma in Electronic Engineering<span class="loc">Taipei, Taiwan</span></p>
@@ -778,49 +822,73 @@
 
 <script>
   (function () {
+    // Theme toggle (initial theme is set by the script in <head>)
     var root = document.documentElement;
     var btn = document.getElementById('theme-toggle');
 
-    function applyTheme(dark) {
-      if (dark) root.setAttribute('data-theme', 'dark');
-      else root.removeAttribute('data-theme');
-      btn.setAttribute('aria-pressed', String(dark));
-    }
-
-    var saved = localStorage.getItem('theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    applyTheme(saved === 'dark' || (!saved && prefersDark));
+    function isDark() { return root.getAttribute('data-theme') === 'dark'; }
+    btn.setAttribute('aria-pressed', String(isDark()));
 
     btn.addEventListener('click', function () {
-      var dark = root.getAttribute('data-theme') === 'dark';
-      applyTheme(!dark);
-      localStorage.setItem('theme', dark ? 'light' : 'dark');
+      var dark = !isDark();
+      root.setAttribute('data-theme', dark ? 'dark' : 'light');
+      btn.setAttribute('aria-pressed', String(dark));
+      try { localStorage.setItem('theme', dark ? 'dark' : 'light'); } catch (e) {}
     });
 
-    // Scroll-spy: highlight the nav link for the section in view
-    var links = document.querySelectorAll('#nav-links a[href^="#"]');
-    var sections = [];
-    links.forEach(function (link) {
-      var target = document.querySelector(link.getAttribute('href'));
-      if (target) sections.push({ el: target, link: link });
-    });
+    // Scroll-spy: highlight the nav link for the section being read.
+    // A section is "current" once its top passes 30% down the viewport;
+    // at the very bottom of the page the last link wins, since short
+    // final sections can never scroll that far.
+    var strip = document.getElementById('nav-links');
+    var links = Array.prototype.slice.call(strip.querySelectorAll('a[href^="#"]'));
+    var sections = links
+      .map(function (link) { return { el: document.querySelector(link.getAttribute('href')), link: link }; })
+      .filter(function (s) { return s.el; });
+    var current = null;
+    var ticking = false;
 
-    if ('IntersectionObserver' in window) {
-      var current = null;
-      var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            if (current) current.removeAttribute('aria-current');
-            var match = sections.find(function (s) { return s.el === entry.target; });
-            if (match) {
-              match.link.setAttribute('aria-current', 'true');
-              current = match.link;
-            }
-          }
-        });
-      }, { rootMargin: '-20% 0px -70% 0px' });
-      sections.forEach(function (s) { observer.observe(s.el); });
+    function setCurrent(link) {
+      if (link === current) return;
+      if (current) current.removeAttribute('aria-current');
+      if (link) {
+        link.setAttribute('aria-current', 'true');
+        revealInStrip(link);
+      }
+      current = link;
     }
+
+    // On narrow screens the link strip scrolls sideways; keep the active link visible.
+    // (Scrolls only the strip, so it never interrupts the page's own smooth scroll.)
+    function revealInStrip(link) {
+      if (strip.scrollWidth <= strip.clientWidth) return;
+      var s = strip.getBoundingClientRect();
+      var l = link.getBoundingClientRect();
+      var fade = 24;
+      if (l.left < s.left) strip.scrollLeft -= s.left - l.left;
+      else if (l.right > s.right - fade) strip.scrollLeft += l.right - (s.right - fade);
+    }
+
+    function update() {
+      ticking = false;
+      var line = window.innerHeight * 0.3;
+      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      var active = null;
+      if (atBottom && sections.length) {
+        active = sections[sections.length - 1].link;
+      } else {
+        sections.forEach(function (s) {
+          if (s.el.getBoundingClientRect().top <= line) active = s.link;
+        });
+      }
+      setCurrent(active);
+    }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
   })();
 </script>
 
